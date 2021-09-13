@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: spring-petclinic
+  name: test-server-v1
+  annotations:
+    mesh.megaease.com/service-name: "vets-services"
+spec:
+  replicas: 1 # tells deployment to run 2 pods matching the template
+  selector:
+    matchLabels:
+      app: test-server-v1
+  template:
+    metadata:
+      labels:
+        app: test-server-v1
+    spec:
+      containers:
+      - name: xxx
+        image: zhaokundev/easestack-test-server:latest
+        ports:
+        - containerPort: 18080
+        env:
+        - name: "key1"
+          value: "v1"
